@@ -1,0 +1,28 @@
+{
+  "payments": [
+    {
+      "reason": "frnds",
+      "amount": "600",
+      "date": "2024-02-14",
+      "id": 3
+    },
+    {
+      "reason": "this",
+      "amount": "500",
+      "date": "2024-01-10",
+      "id": 4
+    },
+    {
+      "reason": "ice cream",
+      "amount": "900",
+      "date": "2024-01-01",
+      "id": 5
+    },
+    {
+      "reason": "helicopter",
+      "amount": "6000",
+      "date": "2024-01-02",
+      "id": 6
+    }
+  ]
+}
