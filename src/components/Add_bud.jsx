@@ -49,7 +49,7 @@ function Add_bud() {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Add your new budget here</Modal.Title>
+          <Modal.Title>Add New Budget</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className='justify-centre'>

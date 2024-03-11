@@ -45,7 +45,7 @@ const [expenseData, setExpenseData] = useState({
 
   useEffect(() => {
     axios
-      .get('http://localhost:3000/payments')
+      .get('https://dataforexpensetracker.onrender.com/payments')
       .then((res) => {
         const expenses = res.data;
 

@@ -12,10 +12,11 @@ function Progressbar({ expense }) {
     let percentage;
     if (budget !== 0) {
         percentage = (expense / budget) * 100;
+        
     } else {
         percentage = 0;
     }
-
+    let percentageRounded = percentage.toFixed(2);
     return ( 
          <div class="d-flex-coloumn col-sm-10 card offset-sm-1 mt-1">
           <div className="card">
@@ -23,16 +24,16 @@ function Progressbar({ expense }) {
       <Container>
                         <Row className="align-items-center">
                             <Col xs={12} md="auto">
-                                Expenditure :
+                               <h5 className=' pd-0 mb-0'>Expense :</h5> 
                             </Col>
                             <Col xs={12} md={8}>
                                 <CDBContainer>
-                                    <CDBProgress value={percentage} text={`${percentage}%`} style={{ width: '100%' }} />
+                                    <CDBProgress value={percentage} text={`${percentageRounded}%`} style={{ width: '100%' }} />
                                 </CDBContainer>
                             </Col>
                             <Col xs={12} md="auto">
                                 <Link to="/Chart" className="btn btn-primary ms-3">
-                                    Chart
+                                     View Chart
                                 </Link>
                             </Col>
                         </Row>

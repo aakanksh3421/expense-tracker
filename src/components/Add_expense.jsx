@@ -28,7 +28,7 @@ function Add_expense() {
   
   useEffect(() => {
     
-    axios.get("http://localhost:3000/payments")
+    axios.get("https://dataforexpensetracker.onrender.com/payments")
       .then((response) => {
         const expenses = response.data;
         let total = 0;
@@ -50,7 +50,7 @@ function Add_expense() {
     e.preventDefault();
 
     axios
-      .post("http://localhost:3000/payments", TempExp)
+      .post("https://dataforexpensetracker.onrender.com/payments", TempExp)
       .then(() => {
         window.location.reload();
 
@@ -77,25 +77,25 @@ function Add_expense() {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Add Your New Expense </Modal.Title>
+          <Modal.Title>Add New Expense </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group className="mb-3" controlId="causespend">
-              <Form.Label>Cause of Spending </Form.Label>
+            <Form.Group className="mb-3" >
+              <Form.Label>Cause Of Spending </Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Reason"
+                placeholder="Enter cause of spending"
                 autoComplete='off'
                 value={TempExp.reason}
                 onChange={(e) => setTempExp({ ...TempExp, reason: e.target.value })}
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="causespend">
+            <Form.Group className="mb-3" >
               <Form.Label>Category  </Form.Label>
               <Form.Control
                 type="text"
-                placeholder="category"
+                placeholder="Enter category"
                 autoComplete='off'
                 value={TempExp.category}
                 onChange={(e) => setTempExp({ ...TempExp, category: e.target.value })}
@@ -121,7 +121,8 @@ function Add_expense() {
               <Form.Label>Input Amount</Form.Label>
               <Form.Control
                 type="0-9"
-                placeholder="Amount "
+                autoComplete='off'
+                placeholder="Enter amount "
                 value={TempExp.amount}
                 onChange={(e) => setTempExp({ ...TempExp, amount: e.target.value })} />
             </Form.Group>

@@ -10,7 +10,7 @@ export default function Spend_history() {
   //const[Bud,Setbud]= useState(()=>0);
   useEffect(() => {
     axios
-      .get('http://localhost:3000/payments')
+      .get('https://dataforexpensetracker.onrender.com/payments')
       .then((res) => {
         setData(res.data);
       })
@@ -19,14 +19,18 @@ export default function Spend_history() {
 
   }, []);
 
-
+  function formatDate(inputDate) {
+        const parts = inputDate.split('-');// date split into 3 parts 0 1 2 
+        const formattedDate = `${parts[2]}-${parts[1]}-${parts[0]}`; // parts rearragned as 210
+    return formattedDate;
+  }
 
   const handleDelete = (id) => {
     const confirmDelete = window.confirm('Would you like to delete?');
 
     if (confirmDelete) {
       axios
-        .delete(`http://localhost:3000/payments/${id}`)
+        .delete(`https://dataforexpensetracker.onrender.com/payments/${id}`)
         .then(() => {
           window.location.reload();
         })
@@ -60,7 +64,7 @@ export default function Spend_history() {
                 {data.map((d, i) => (
                   <tr key={i}>
                     <td>{d.id}</td>
-                    <td>{d.date}</td>
+                    <td>{ formatDate(d.date)}</td>
                     <td>{d.reason}</td>
                     <td>{d.category}</td>
                     <td>{d.amount}</td>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Chart, ArcElement, Tooltip, Legend, Title } from 'chart.js';
+import { Chart, ArcElement, Tooltip, Legend, Title} from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import axios from 'axios'
 import Nav from 'react-bootstrap/Nav';
@@ -14,7 +14,7 @@ Chart.register(ArcElement, Tooltip, Legend, Title);
 Chart.defaults.plugins.tooltip.backgroundColor = 'rgb(0, 0, 156)';
 Chart.defaults.plugins.legend.position = 'right';
 Chart.defaults.plugins.legend.title.display = true;
-Chart.defaults.plugins.legend.title.text = 'representations';
+Chart.defaults.plugins.legend.title.text = 'Labels';
 Chart.defaults.plugins.legend.title.font = 'Helvetica Neue';
 
 
@@ -34,7 +34,7 @@ function CreateDoughnutData() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:3000/payments')
+      .get('https://dataforexpensetracker.onrender.com/payments')
       .then((res) => {
         const expenses = res.data;
 
@@ -88,25 +88,27 @@ function CreateDoughnutData() {
     id="CreateDoughnutData"
     className="mb-3"
   >
-    <TabPane eventKey="Home" title="Categories">
+    <TabPane eventKey="Home" title="Expense break down">
      
       <div className="d-flex justify-content-center align-items-center " style={{ height: '100vh' }}>
         <div className="border p-4 ">
           <div style={{ width: '600px', height: '500px' }} className='justify-content-evenly'>
             <div className=' justify-content-center align-items-center'>
-              <h1 style={{ textAlign: 'center',  }}>Expenditure on Different Items</h1>
+              <h1 style={{ textAlign: 'center',  }}>Expense break down</h1>
             </div>
             <div className=' flex-grow-3 justify-content-center '>
-            <Doughnut data={expenseData} />
+            <Doughnut  
+             //options= {{aspectRatio: 1}}
+            data={expenseData} />
             </div>
           </div>
         </div>
       </div>
       </TabPane>
-      <TabPane eventKey="profile" title="DailyChart">
+      <TabPane eventKey="profile" title="Daily expense">
       <Linechart/>
       </TabPane>
-      <TabPane eventKey="second" title="Monthly">
+      <TabPane eventKey="second" title="Monthly expense">
       <Bar_chart/>
       </TabPane>
       </Tabs>

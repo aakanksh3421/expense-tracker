@@ -24,7 +24,7 @@ export default function Home() {
 
   useEffect(() => {
     
-    axios.get("http://localhost:3000/payments")
+    axios.get("https://dataforexpensetracker.onrender.com/payments")
       .then((response) => {
         const expenses = response.data;
         let total = 0;

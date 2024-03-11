@@ -26,7 +26,7 @@ export default function Bar_chart() {
 
     useEffect(() => {
         axios
-            .get('http://localhost:3000/payments')
+            .get('https://dataforexpensetracker.onrender.com/payments')
             .then((res) => {
                 const expenses = res.data;
 
@@ -95,7 +95,7 @@ export default function Bar_chart() {
         <div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <div style={{ alignItems: 'center', width: '600px', height: '600px', padding: '20px' }}>
-                    <h1 style={{ alignItems: 'center', justifyContent: 'center', padding: '20px' }}>Daily Expense</h1>
+                    <h1 style={{ alignItems: 'center', justifyContent: 'center', padding: '20px' }}>Monthly Expense</h1>
                     <Bar
                         data={expenseData}
                         options={options}
