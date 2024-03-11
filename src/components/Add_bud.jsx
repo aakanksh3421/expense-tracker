@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { currencyFormat } from "./util";
 import { Link } from "react-router-dom";
+import Progressbar from './progressbar';
 
 function Add_bud() {
   const [show, setShow] = useState(false);
@@ -14,7 +15,7 @@ function Add_bud() {
 
   const handleSaveBudget = () => {
     setBudget(TempBudget);
-    
+
     localStorage.setItem('budget', TempBudget.toString());
      handleClose();
   };
@@ -33,11 +34,11 @@ function Add_bud() {
     <>
       <div className="card">
       <div className="card-body">
-          <h5 className="card-title">Budget</h5>
+          <h5 className="card-title">BUDGET</h5>
           <p className="card-text">{currencyFormat(budget)}</p>
 
           <Button variant="primary" onClick={handleShow}>
-            SET BUDGET
+            Set Budget
           </Button>
           </div>
          </div>

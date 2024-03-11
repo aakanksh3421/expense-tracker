@@ -1,3 +1,21 @@
-.blue{
-    background-color: rgb(45, 67, 189);
+.grey{
+    background-color: #343a40;
+    
+}
+/* background-color: rgb(63, 68, 97); */
+.setYellow{
+    background-color:rgb(201, 204, 34);
+    padding-top: 10px;
+}
+.spend{
+    padding-bottom: 15px;
+}
+.sh{
+    padding-top: 10px;
+}
+.sticky-header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: #f2f2f2;
 }

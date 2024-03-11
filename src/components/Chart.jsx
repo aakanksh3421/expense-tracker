@@ -1,66 +1,117 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Chart, ArcElement, Tooltip, Legend, Title } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
-import { CDBContainer } from 'cdbreact';
-import axios from 'axios';
+import axios from 'axios'
+import Nav from 'react-bootstrap/Nav';
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
+import TabPane from 'react-bootstrap/TabPane';
+import Linechart from './Linechart';
+import Bar_chart from './Barchart';
 
-const Chart = () => {
-  const [data, setData] = useState({
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-    datasets: [
-      {
-        label: 'My First dataset',
-        fill: false,
-        lineTension: 0.1,
-        backgroundColor: 'rgba(194, 116, 161, 0.5)',
-        borderColor: 'rgb(194, 116, 161)',
-        borderCapStyle: 'butt',
-        borderDash: [],
-        borderDashOffset: 0.0,
-        borderJoinStyle: 'miter',
-        pointBorderColor: 'rgba(75,192,192,1)',
-        pointBackgroundColor: '#fff',
-        pointBorderWidth: 1,
-        pointHoverRadius: 5,
-        pointHoverBackgroundColor: 'rgba(71, 225, 167, 0.5)',
-        pointHoverBorderColor: 'rgb(71, 225, 167)',
-        pointHoverBorderWidth: 2,
-        pointRadius: 1,
-        pointHitRadius: 10,
-        data: [65, 59, 80, 81, 56, 55, 40],
-      },
-    ],
+
+Chart.register(ArcElement, Tooltip, Legend, Title);
+Chart.defaults.plugins.tooltip.backgroundColor = 'rgb(0, 0, 156)';
+Chart.defaults.plugins.legend.position = 'right';
+Chart.defaults.plugins.legend.title.display = true;
+Chart.defaults.plugins.legend.title.text = 'representations';
+Chart.defaults.plugins.legend.title.font = 'Helvetica Neue';
+
+
+function CreateDoughnutData() {
+  const [expenseData, setExpenseData] = useState({
+    labels: [],
+    datasets: [{
+      data: [],
+      backgroundColor: [
+        'rgb(0, 197, 0)',
+        'rgb(204, 223, 243)'
+      ],
+      borderWidth: 2,
+      radius: '40%'
+    }]
   });
 
   useEffect(() => {
-    setInterval(function() {
-      var oldDataSet = data.datasets[0];
-      var newData = [];
+    axios
+      .get('http://localhost:3000/payments')
+      .then((res) => {
+        const expenses = res.data;
 
-      for (var x = 0; x < data.labels.length; x++) {
-        newData.push(Math.floor(Math.random() * 100));
-      }
+        const categoriesMap = new Map();
+        expenses.forEach((expense) => {
+          const label = expense.category; // Expense category used as label
+          const amount = parseFloat(expense.amount); 
+          if (categoriesMap.has(label)) {
+            categoriesMap.set(label, categoriesMap.get(label) + amount);
+          } else {
+            categoriesMap.set(label, amount);
+          }
+        });
 
-      var newDataSet = {
-        ...oldDataSet,
-      };
+        const categories = [...categoriesMap.keys()];
+        const amount = [...categoriesMap.values()];
+        
 
-      newDataSet.data = newData;
+        const data = {
+          labels: categories,
+          datasets: [{
+            data: amount,
+            backgroundColor: [
+              'rgb(0, 197, 0)',
+              'rgb(204, 223, 243)',
+              'rgb(255, 99, 132)',
+              'rgb(54, 162, 235)',
+              'rgb(255, 205, 86)',
+              'rgb(75, 192, 192)',
+              'rgb(153, 102, 255)',
+              'rgb(255, 159, 64)',
+              'rgb(255, 0, 0)',
+              'rgb(0, 255, 0)',
+            ],
+            borderWidth: 2,
+            radius: '40%'
+          }]
+        };
 
-      var newState = {
-        ...data,
-        datasets: [newDataSet],
-      };
-
-      setData(newState);
-    }, 5000);
+        setExpenseData(data);
+      })
+      .catch((err) => console.log(err));
   }, []);
 
   return (
-    <CDBContainer>
-      <h3 className="mt-5">Dynamicly Refreshed Doughnut chart</h3>
-      <Doughnut data={data} options={{ responsive: true }} />
-    </CDBContainer>
+    
+    <div>
+      
+      <Tabs
+    defaultActiveKey="Home"
+    id="CreateDoughnutData"
+    className="mb-3"
+  >
+    <TabPane eventKey="Home" title="Categories">
+     
+      <div className="d-flex justify-content-center align-items-center " style={{ height: '100vh' }}>
+        <div className="border p-4 ">
+          <div style={{ width: '600px', height: '500px' }} className='justify-content-evenly'>
+            <div className=' justify-content-center align-items-center'>
+              <h1 style={{ textAlign: 'center',  }}>Expenditure on Different Items</h1>
+            </div>
+            <div className=' flex-grow-3 justify-content-center '>
+            <Doughnut data={expenseData} />
+            </div>
+          </div>
+        </div>
+      </div>
+      </TabPane>
+      <TabPane eventKey="profile" title="DailyChart">
+      <Linechart/>
+      </TabPane>
+      <TabPane eventKey="second" title="Monthly">
+      <Bar_chart/>
+      </TabPane>
+      </Tabs>
+    </div>
   );
-};
+}
 
-export default Chart;
+export default CreateDoughnutData;

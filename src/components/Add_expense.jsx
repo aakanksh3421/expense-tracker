@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import { currencyFormat } from './util';
 import axios from 'axios';
+
 import { Link } from "react-router-dom";
 import { ReactDOM } from 'react';
 import { CDBProgress, CDBContainer } from "cdbreact";
@@ -17,6 +17,7 @@ function Add_expense() {
   const [TempExp, setTempExp] =
     useState({
       reason: '',
+      category: '',
       amount: '',
       date: '',
 
@@ -69,14 +70,14 @@ function Add_expense() {
           <p class="card-text">{currencyFormat(Expense)}</p>
            <progressbar/>
           <Button variant="primary" onClick={handleShow}>
-            Add new Expense
+            Add New Expense
           </Button>
         </div>
       </div>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Add your new</Modal.Title>
+          <Modal.Title>Add Your New Expense </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -85,8 +86,19 @@ function Add_expense() {
               <Form.Control
                 type="text"
                 placeholder="Reason"
+                autoComplete='off'
                 value={TempExp.reason}
                 onChange={(e) => setTempExp({ ...TempExp, reason: e.target.value })}
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="causespend">
+              <Form.Label>Category  </Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="category"
+                autoComplete='off'
+                value={TempExp.category}
+                onChange={(e) => setTempExp({ ...TempExp, category: e.target.value })}
               />
             </Form.Group>
             <Form.Group
@@ -94,7 +106,7 @@ function Add_expense() {
               controlId="causespend"
             >
               <Form.Label>Date</Form.Label>
-              <input
+              <Form.Control
                 type="date"
                 placeholder="dd-mm-yyyy "
                 value={TempExp.date}
@@ -107,7 +119,7 @@ function Add_expense() {
               controlId="causespend"
             >
               <Form.Label>Input Amount</Form.Label>
-              <input
+              <Form.Control
                 type="0-9"
                 placeholder="Amount "
                 value={TempExp.amount}
