@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Progressbar from './progressbar'; 
  import "./Home.css"
 
 export default function Spend_history() {
