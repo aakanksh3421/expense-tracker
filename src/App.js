@@ -10,7 +10,7 @@ import { ReactDOM } from 'react';
 
 function App() {
   return (
-    <div>
+    <div className = "flex" >
    <Router>
     <Routes>
       <Route path = '/' element = {<Home />}/>

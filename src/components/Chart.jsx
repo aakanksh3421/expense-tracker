@@ -8,7 +8,7 @@ import Tabs from 'react-bootstrap/Tabs';
 import TabPane from 'react-bootstrap/TabPane';
 import Linechart from './Linechart';
 import Bar_chart from './Barchart';
-
+import "./Home.css"
 
 Chart.register(ArcElement, Tooltip, Legend, Title);
 Chart.defaults.plugins.tooltip.backgroundColor = 'rgb(0, 0, 156)';
@@ -81,8 +81,8 @@ function CreateDoughnutData() {
 
   return (
     
-    <div>
-      
+    <div className=' flex justify-content-center '>
+     
       <Tabs
     defaultActiveKey="Home"
     id="CreateDoughnutData"
@@ -96,7 +96,7 @@ function CreateDoughnutData() {
             <div className=' justify-content-center align-items-center'>
               <h1 style={{ textAlign: 'center',  }}>Expense break down</h1>
             </div>
-            <div className=' flex-grow-3 justify-content-center '>
+            <div className=' flex justify-content-center '>
             <Doughnut  
              //options= {{aspectRatio: 1}}
             data={expenseData} />
@@ -112,6 +112,7 @@ function CreateDoughnutData() {
       <Bar_chart/>
       </TabPane>
       </Tabs>
+    
     </div>
   );
 }

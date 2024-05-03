@@ -46,7 +46,7 @@ export default function Spend_history() {
              <div className="card-body pt-0" style={{ height: '300px', overflowY: 'auto' }}>
           
         <h6 className="card-subtitle text-muted"></h6>
-          <div className="table-wrapper-scroll-y my-custom-scrollbar">
+          <div className=" flex-table-wrapper-scroll-y my-custom-scrollbar">
             <table className="table table-striped">
               <thead>
                

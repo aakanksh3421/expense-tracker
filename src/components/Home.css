@@ -19,3 +19,27 @@
     z-index: 1;
     background-color: #f2f2f2;
 }
+
+.a1{
+margin-left: auto;
+margin-right: auto;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+.a2{
+    margin-left: auto;
+margin-right: auto;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+visibility: collapse;
+
+}
+
+@media  only screen and  (max-width:412px){
+    .a1{
+        visibility: hidden;
+
+    }
+    .a2{
+        visibility: visible;
+    }
+}

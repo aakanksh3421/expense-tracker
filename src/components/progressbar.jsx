@@ -1,15 +1,27 @@
 import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
 import { CDBProgress, CDBContainer } from "cdbreact";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import { Link } from 'react-router-dom';
-import { Axios } from 'axios';
+import axios from 'axios';
 
 function Progressbar({ expense }) {
-    // let budget = 100000;
-    let budget = localStorage.getItem('budget');
+    const[budget,setbudget] = useState(0);
+   
+    
+    useEffect(() => {
+    
+    axios.get("https://dataforexpensetracker.onrender.com/budget")
+          .then((response) => {
+        setbudget(response.data.budget);
+        })
+      }, []);
+  
     let percentage;
+
     if (budget !== 0) {
         percentage = (expense / budget) * 100;
         

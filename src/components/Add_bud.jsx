@@ -5,6 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import { currencyFormat } from "./util";
 import { Link } from "react-router-dom";
 import Progressbar from './progressbar';
+import axios from 'axios';
 
 function Add_bud() {
   const [show, setShow] = useState(false);
@@ -16,16 +17,28 @@ function Add_bud() {
   const handleSaveBudget = () => {
     setBudget(TempBudget);
 
-    localStorage.setItem('budget', TempBudget.toString());
-     handleClose();
+    axios.post("https://dataforexpensetracker.onrender.com/budget",{budget : TempBudget})
+    .then(()=> 
+    {
+      
+      window.location.reload();
+  })
+    
+
+    // localStorage.setItem('budget', TempBudget.toString());
+    //  handleClose();
   };
 
   useEffect(() => {
-    const storedBudget = localStorage.getItem('budget');
-    if (storedBudget) {
-      setBudget(parseFloat(storedBudget));
-      
-    }
+    axios.get("https://dataforexpensetracker.onrender.com/budget")
+    .then((response)=> {
+      const storedBudget = response.data.budget;
+      if (storedBudget) {
+        setBudget(parseFloat(storedBudget));
+      }
+     
+    })
+   
    
   }, []);
 

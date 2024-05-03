@@ -45,7 +45,7 @@ export default function Home() {
 
 
   return (
-    <div className="h-100">
+    <div className= "flex">
       <div  className=" grey d-flex-coloumn mb-3  align-self-center text-center  jsutify-md-centre  ">
         <div>
           <div className=" setYellow  d-fex-coloumn col-sm-10 card  offset-sm-1  ;">
